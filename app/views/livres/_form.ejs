@@ -1,0 +1,67 @@
+<!-- Form -->
+<form class="row row-cols-lg-auto g-3 align-items-center" method="post" action="<%= action %>">
+    <!-- Titre input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input type="text" 
+            id="title" 
+            name="title" 
+            class="form-control" 
+            value="<%= livre ? livre.title : '' %>" required/>
+        <label class="form-label" for="title">Titre</label>
+    </div>
+
+    <!-- Auteur input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input 
+            type="text" 
+            id="author" 
+            name="author" 
+            class="form-control" 
+            value="<%= livre ? livre.author : '' %>" 
+            required />
+        <label class="form-label" for="author">Auteur</label>
+    </div>
+
+    <!-- Image input -->
+    <div data-mdb-input-init class="form-outline mb-4">
+        <input 
+            type="text" 
+            id="imgUrl" 
+            name="imgUrl" 
+            class="form-control" 
+            value="<%= livre ? livre.imgUrl : '' %>" 
+            required />
+        <label class="form-label" for="imgUrl">Image</label>
+    </div>
+
+    <!-- Catégorie selection -->
+    <div class="col-12">
+        <label class="visually-hidden" for="category">Catégorie</label>
+        <select data-mdb-select-init class="select"  id="category" name="category">
+            <option value="">-- Sélectionnez une catégorie --</option>
+            <% for (const category of categories) { %>
+                <option value="<%= category._id %>" 
+                    <%= livre && livre.category && livre.category.toString() === category._id.toString() ? 'selected' : '' %> >
+                    <%= category.name %>
+                </option>
+            <% } %>
+        </select>
+    </div>
+
+    <!-- Statut -->
+    <div class="col-12">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="status" name="status" value="true" <%= livre && livre.status ? 'checked' : '' %>
+            />
+            <label class="form-check-label" for="status">
+                Statut
+            </label>
+        </div>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <div class="col-12">
+        <button data-mdb-ripple-init type="submit" class="btn btn-primary"><%= submitLabel %></button>
+    </div>
+</form>
+<!--/.Form-->

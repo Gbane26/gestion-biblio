@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head', {title: 'Livre'}); %>
+</head>
+<body>
+    <!--Main Navigation-->
+<header>
+  <style>
+    /* Carousel styling */
+    #introCarousel,
+    .carousel-inner,
+    .carousel-item,
+    .carousel-item.active {
+      height: 100vh;
+    }
+
+    .carousel-item:nth-child(1) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    .carousel-item:nth-child(2) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+    .carousel-item:nth-child(3) {
+      background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    /* Height for devices larger than 576px */
+    @media (min-width: 992px) {
+      #introCarousel {
+        margin-top: -58.59px;
+      }
+      #introCarousel,
+      .carousel-inner,
+      .carousel-item,
+      .carousel-item.active {
+        height: 50vh;
+      }
+    }
+
+    .navbar .nav-link {
+      color: #fff !important;
+    }
+  </style>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block" style="z-index: 2000;">
+    <div class="container-fluid">
+      <!-- Navbar brand -->
+      <a class="navbar-brand nav-link"  href="/livres">
+        <strong>Gestionnaire en ligne</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-mdb-collapse-init data-mdb-target="#navbarExample01"
+              aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarExample01">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/livres" rel="nofollow"
+               target="">Livres</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/category" target="">Catégorie</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav d-flex flex-row">
+          <!-- Icons -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="" rel="nofollow"
+               >
+              <i class="fab fa-youtube"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="https://www.facebook.com/" rel="nofollow" >
+              <i class="fab fa-facebook-f"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="https://twitter.com/" rel="nofollow" >
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="https://github.com/" rel="nofollow" >
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!-- Carousel wrapper -->
+  <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" data-mdb-carousel-init>
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <li data-mdb-target="#introCarousel" data-mdb-slide-to="0" class="active"></li>
+    </div>
+
+    <!-- Inner -->
+    <div class="carousel-inner">
+      <!-- Single item -->
+      <div class="carousel-item active">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white text-center" data-mdb-theme="dark">
+              <h1 class="mb-3">Bienvenue sur votre gestionnaire en ligne</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Inner -->
+  </div>
+  <!-- Carousel wrapper -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main class="mt-5 pt-4">
+    <div class="container mt-5">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <img src="<%= livre.imgUrl %>" class="img-fluid" alt="" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <!--Content-->
+                <div class="p-4">
+                  <div class="mb-3">
+                    <% if (livre.category) { %>
+                        <a href="">
+                            <span class="badge bg-info me-1"><%= livre.category.name %></span>
+                        </a>
+                    <% } else { %>
+                        <span class="badge bg-info me-1">Aucune catégorie</span>
+                    <% } %>
+                </div>
+
+                    <strong><p style="font-size: 20px;"><%= livre.title %></p></strong>
+
+                    <p><%= livre.author %></p>
+                    <a href="">
+                      <span class="badge <%= livre.status ? 'bg-success' : 'bg-danger' %> me-1">
+                          <%= livre.status ? 'Disponible' : 'Pas disponible' %>
+                      </span>
+                    </a>
+                    
+                </div>
+                <a href="/livres/<%= livre._id %>/edit" class="btn btn-link btn-sm btn-rounded">Edit</a>
+                <button type="button" class="btn btn-danger btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#deleteModal<%= livre._id %>">Delete</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal<%= livre._id %>" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Confirmation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                Êtes-vous sûr de vouloir supprimer ce category ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <a href="/livres/<%= livre._id %>/delete" class="btn btn-danger btn-sm btn-rounded">SUPP.</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Content-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <hr />
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+                <h4 class="my-4 h4">Autres Livres</h4>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <!--Grid row-->
+        <div class="row">
+          <!-- Parcours des livres -->
+          <% livres.forEach(livreItem => { %>
+              <% if (livreItem._id.toString() !== livre._id.toString()) { %>
+                  <a href="/livres/<%= livreItem._id %>" class="col-lg-2 col-md-3 col-sm-4 mb-4">
+                      <div class="card">
+                          <img src="<%= livreItem.imgUrl  %>" class="card-img-top" alt="<%= livreItem.title %>" />
+                      </div>
+                  </a>
+              <% } %>
+          <% }); %>
+      </div>
+        <!--Grid row-->
+    </div>
+</main>
+<!--Main layout-->
+
+<!--Footer-->
+<footer class="bg-light text-lg-start">
+
+  <hr class="m-0" />
+
+ 
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2024 Librairie en ligne. Tous droits réservés.
+    <a class="text-dark" href="index.html">Ahamadou</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+    <!-- MDB -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.2.0/mdb.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+</body>
+</html>
+
