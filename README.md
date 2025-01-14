@@ -83,3 +83,29 @@ npm start
 ```
 
 Accédez à l'application dans votre navigateur à l'adresse suivante : http://localhost:3000.
+
+4. Routes disponibles
+
+- Livres
+
+```bash 
+GET /livres : Afficher tous les livres avec un filtrage par catégorie.
+GET /livres/new : Ajouter un nouveau livre.
+POST /livres/create : Enregistrer un nouveau livre.
+GET /livres/:id : Afficher les détails d'un livre.
+GET /livres/:id/edit : Modifier un livre.
+PUT /livres/:id/update : Mettre à jour un livre.
+DELETE /livres/:id/delete : Supprimer un livre.
+```
+
+- Catégories
+
+```bash
+GET /category : Afficher toutes les catégories avec le nombre de livres associés.
+GET /category/new : Ajouter une nouvelle catégorie.
+POST /category/create : Enregistrer une nouvelle catégorie.
+GET /category/:id : Afficher les détails d'une catégorie avec les livres associés.
+GET /category/:id/edit : Modifier une catégorie.
+PUT /category/:id/update : Mettre à jour une catégorie.
+DELETE /category/:id/delete : Supprimer une catégorie (les livres ne sont pas supprimés, mais ils n'auront plus de catégorie associée).
+```
