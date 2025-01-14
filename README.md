@@ -66,10 +66,10 @@ cd gestion-biblio
  un fichier .env
 ```bash
 SERVER_PORT=3000
-DB_HOST=cluster0.f4qnc.mongodb.net
-DB_USER=projet-demo-user
-DB_PASSWORD=JNTsUnrmbIu95dKw
-DB_NAME=onlineLibrary
+DB_HOST=XXXXXXXXXXXXX
+DB_USER=XXXXXXXXXXXX
+DB_PASSWORD=XXXXXXXXXX
+DB_NAME=XXXXXXXXXX
 ```
 
 2. Installez les dépendances :
